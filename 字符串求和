@@ -1,0 +1,30 @@
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+
+        # 因为num1和num2的长度都有可能取到5100位 不能直接int(num1),int(num2)
+        # 按位取整 做普通的加法进位即可
+
+        i,j = len(num1)-1,len(num2)-1     # 两个指针指向字符串的最后一位---个位
+        carry = 0  #表示进位 0，1 两种取值
+        t = ''
+
+        while i >= 0 or j >= 0:
+
+            n1 = int(num1[i]) if i >= 0 else 0    # 按位变成整数 如果两个数长度不一 在最前面补0
+            n2 = int(num2[j]) if j >= 0 else 0
+
+            tmp = n1+n2+carry   # 正常的带进位的加法
+
+            carry = tmp//10  # 取十位 进位
+            t   = str(tmp%10) + t  # 取个位 最后要输出每一个个位 所以要变成str 带上上一次的
+            i -= 1
+            j -= 1
+        return'1'+t if carry else t
+
+
+
+
+
+
+
+
